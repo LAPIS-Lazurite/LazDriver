@@ -636,7 +636,8 @@ int phy_setup(uint8_t page,uint8_t ch, uint8_t txPower,uint8_t antsw)
 	reg.wdata[1] = 0x07, reg_wr(REG_ADR_PA_REG_ADJ2,         2);
 	reg.wdata[1] = 0x07, reg_wr(REG_ADR_PA_REG_ADJ3,         2);
 	if(device_type == MASPRO) {
-		reg.wdata[1] = 0x55, reg_wr(REG_ADR_CCA_LEVEL,           2);
+		HAL_I2C_read(0x84, &reg.wdata[1], 1);
+		reg_wr(REG_ADR_CCA_LEVEL,          2);
 	} else {
 		reg.wdata[1] = 0x30, reg_wr(REG_ADR_CCA_LEVEL,           2);
 	}
